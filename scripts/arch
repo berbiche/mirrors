@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Mirror Archlinux
 
-RSYNCSOURCE=rsync://arch.mirrors.ionfish.org/archlinux/
+RSYNCSOURCE=rsync://mirror.csclub.uwaterloo.ca/archlinux/
 BASEDIR=/media/mirror/archlinux/
 
 fatal() {
@@ -16,5 +16,5 @@ fi
 rsync -rtlvH --stats --delete-after --delay-updates --safe-links \
   "${RSYNCSOURCE}" "${BASEDIR}" || fatal "First stage of sync failed."
 
-host=$(/bin/hostname -f)
-date -u > "${BASEDIR}/project/trace/${host}" || exit 2
+#host=$(/bin/hostname -f)
+#date -u > "${BASEDIR}project/trace/${host}" || exit 2

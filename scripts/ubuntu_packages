@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # Mirror Ubuntu packages. Adapted from https://wiki.ubuntu.com/Mirrors/Scripts
 
-RSYNCSOURCE=rsync://ubuntu.bhs.mirrors.ovh.net/ubuntu/ubuntu/
+RSYNCSOURCE=rsync://ca.archive.ubuntu.com/ubuntu
 BASEDIR=/media/mirror/ubuntu/packages/
 
 ./base_packages "${RSYNCSOURCE}" "${BASEDIR}" || exit 1

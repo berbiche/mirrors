@@ -12,5 +12,8 @@
 # Arch
 36 */2 * * * cd mirrors/scripts/ && ./arch
 
+# Manjaro
+43 */6 * * * cd mirrors/scripts/ && ./manjaroreposync
+
 # Mx-Linux_Packages
 30 */12 * * * cd mirrors/scripts/ && ./mx-linux_packages

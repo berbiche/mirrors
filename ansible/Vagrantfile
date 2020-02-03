@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_version ">= 2.1"
+
+ANSIBLE_VERSION = "2.9.*"
+
+NAME = "mirror.cedille.club"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "generic/debian9"
+  config.ssh.forward_agent = true
+
+  config.vm.provider "libvirt" do |lv, override|
+    lv.memory = "1024"
+
+    #override.vm.synced_folder '.', '/vagrant', type: 'nfs', nfs_version: 4.1, nfs_udp: false, disabled: false, create: true
+
+  end
+
+  config.vm.network "forwarded_port", guest: 80, host: 31080
+  config.vm.network "forwarded_port", guest: 443, host: 31443
+
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.compatibility_mode = "2.0"
+    ansible.install = true
+    ansible.install_mode = "pip_args_only"
+    ansible.pip_args = "ansible==#{ANSIBLE_VERSION}"
+    ansible.playbook = "deploy-local.yml"
+    ansible.galaxy_role_file = "roles.yml"
+    ansible.galaxy_roles_path = "/tmp/galaxy_roles"
+  end  
+
+end
